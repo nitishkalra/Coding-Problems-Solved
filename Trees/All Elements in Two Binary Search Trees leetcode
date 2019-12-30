@@ -1,0 +1,61 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    // Recursive InOrder
+    void InOrder(TreeNode* root,vector<int>& v){
+        if(root==NULL) return;
+        InOrder(root->left,v);
+        v.push_back(root->val);
+        InOrder(root->right,v);
+    }
+    // Iterative InOrder
+    void InOrderIterative(TreeNode* root,vector<int>& v){
+        stack<TreeNode* > s;
+        TreeNode* curr = root;
+        while(curr!=NULL|| s.empty()==false){
+            while(curr!=NULL){
+                s.push(curr);
+                curr = curr->left;
+            }
+            curr = s.top();
+            s.pop();
+            v.push_back(curr->val);
+            curr = curr->right;
+        }
+    }
+    vector<int> getAllElements(TreeNode* root1, TreeNode* root2) {
+        vector<int> v1;
+        vector<int> v2;
+        InOrderIterative(root1,v1);
+        InOrderIterative(root2,v2);
+        int i=0,j=0;
+        vector<int> ans;
+        while(i<v1.size()&&j<v2.size()){
+            if(v1[i]<v2[j]){
+                ans.push_back(v1[i]);
+                i++;
+            }
+            else{
+                ans.push_back(v2[j]);
+                j++;
+            }
+        }
+        while(i<v1.size()){
+            ans.push_back(v1[i]);
+            i++;
+        }
+        while(j<v2.size()){
+            ans.push_back(v2[j]);
+            j++;
+        }
+        return ans;
+    }
+};
