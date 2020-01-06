@@ -1,0 +1,36 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class FindElements {
+public:
+    TreeNode* deRoot = NULL;
+    unordered_set<int> s;
+   void giveValues(TreeNode* root,int val){
+        if(root==NULL) return;
+        root->val = val;
+       s.insert(val);
+        if(root->left!=NULL) giveValues(root->left,2*val+1);
+        if(root->right!=NULL) giveValues(root->right,2*val+2);
+        return;
+    }
+    FindElements(TreeNode* root) {
+        giveValues(root,0);
+        deRoot = root;
+    }
+    bool find(int target) {
+        if(s.find(target)!=s.end()) return true;
+        else return false;
+    }
+};
+
+/**
+ * Your FindElements object will be instantiated and called as such:
+ * FindElements* obj = new FindElements(root);
+ * bool param_1 = obj->find(target);
+ */
