@@ -29,3 +29,7 @@ int partition(int a[],int low,int high){
   a[right] = pivot;
   return right;
 }
+// Algorithm Analysis
+// Average case time complexity = O(nlogn)
+// Worst case time complexity = O(n-square)  ( if the list is already sorted and we are selecting pivot as always the first or last element
+// Space average- O(logn) worst - O(n)
