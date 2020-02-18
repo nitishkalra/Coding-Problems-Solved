@@ -1,0 +1,44 @@
+void MergeSort(int a[], int temp[], int left, int right){
+  int mid;
+  if(right>left){
+    mid = (r+l)/2;
+    MergeSort(a,temp,left,mid);
+    MergeSort(a,temp,mid+1,right);
+    Merge(a,temp,l,mid+1,right);
+  }
+}
+void Merge(int a[],int temp[],int left,int mid,int right){
+  int i, left_end,temp_end;
+  int size = right-left+1;
+  left_end = mid-1;
+  while((left<=left_end)&&(mid<=right)){
+    if(a[left]<=a[mid]){
+      temp[temp_pos] = a[left];
+      left++;
+      temp_pos++;
+    }
+    else{
+      temp[temp_pos] = a[mid];
+      mid++;
+      temp_pos++:
+    }
+  }
+  while(left<=left_end){
+      temp[temp_pos] = a[left];
+      left++;
+      temp_pos++;
+  }
+  while(mid<=right){
+    temp[temp_pos] = a[mid];
+      mid++;
+      temp_pos++:
+  }
+  for(i=0;i<=size;i++){
+    a[right] = temp[right];
+    right--;
+  }
+}
+
+//Algorithm Analysis
+// Time Complexity - O(nlogn) // each time the problem is divided into half
+// Space complexity - o(n) (auxillary)
